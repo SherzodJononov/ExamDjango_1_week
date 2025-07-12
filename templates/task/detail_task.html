@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<style>
+    .all
+    {
+        width: 100%;
+        height: auto;
+    }
+    .nav
+    {
+        display: flex;
+        justify-content: space-around;
+        height: 20px;
+        padding: 20px 0px;
+        background-color: orange;
+        font-size: 18px;
+
+    }
+    .image
+    {
+        margin-top: 20px; 
+        height: 800px;
+        background-image: url('/static/image/Task.png');
+        background-size: cover; /* заполнить весь экран */
+        background-repeat: no-repeat; /* не повторять */
+        width: 45%;
+    }
+    .imageh2
+    {
+        text-align: center;
+        padding-top: 180px;
+        padding-left: 70px;
+    }
+    .pageone{
+        display: flex;
+        justify-content: space-around;
+    }
+    .tasks
+    {
+        width: 55%;
+    }
+    .tasks {
+  margin: 20px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.tasks table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.tasks th, .tasks td {
+  padding: 12px 16px;
+  border: 1px solid #333;
+  text-align: left;
+}
+
+.tasks th {
+  background-color: #2a2a2a;
+  color: #00bcd4;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.tasks tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.tasks tr:hover {
+  background-color: #333;
+  transition: background 0.2s;
+}
+ 
+ 
+</style>
+<body>
+    
+    <div class="all">
+
+        <div class="nav">
+            <a href="{% url 'home-view' %}">Home</a>
+            <a href="{% url 'create-task-view' %}">CreateTask</a>
+        </div>
+        <div class="pageone">
+
+            <div class="image">
+                
+            </div>
+
+            <div class="tasks">
+                <table class="table">
+                    <tr>
+                        <th>id</th>
+                        <th>user_id</th>
+                        <th>title</th>
+                        <th>description</th>
+                        <th>is_completed</th>
+                        <th>created_at</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    {% for t in task %}
+                    <tr>
+                        <td>{{t.id}}</td>
+                        <td>{{t.user_id}}</td>
+                        <td>{{t.title}}</td>
+                        <td>{{t.description}}</td>
+                        <td>{{t.is_compeleted}}</td>
+                        <td>{{t.created_at}}</td>
+                        <td  class="sls"><a href="{% url 'delete-task-view' t.id %}">Delete</a></td>
+                        <td  class="sls"><a href="{% url 'create-task-view' %}">Edit</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

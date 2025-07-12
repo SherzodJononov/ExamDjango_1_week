@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_Delete</title>
+</head>
+<body>
+    
+    
+</body>
+</html>
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create_Task</title>
+<link rel="stylesheet" href="">
+</head>
+<style>
+    .all
+    {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .formtask
+    {
+        width: 20%;
+        margin-top: 200px;
+        text-align: center;
+    }
+
+    .formm
+    {
+        display: flex;
+        flex-direction: column;
+
+    }
+      .nav
+    {
+        display: flex;
+        justify-content: space-around;
+        height: 20px;
+        padding: 20px 0px;
+        background-color: orange;
+        font-size: 18px;
+
+    }
+     .image
+    {
+        width: 45%;
+        margin-top: 20px;
+    }
+   
+</style>
+<body>
+    <div class="nav">
+            <a href="{% url 'home-view' %}">Home</a>
+            <a href="{% url 'detail-task-view' %}">Tasks</a>
+        </div>
+    <div class="all">
+        
+        <div class="image">
+            <img src="/static/image/Task.png" alt="">
+        </div>
+
+    <h2>Are tou sure to delete {{ task.title }}</h2>
+    <a href="{% url 'detail-task-view' %}">No</a>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Yes">
+    </form>
+        </div>
+    </div>
+</body>
+</html>

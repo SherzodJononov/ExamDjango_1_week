@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<style>
+    .all
+    {
+        width: 100%;
+        height: auto;
+    }
+    .nav
+    {
+        display: flex;
+        justify-content: space-around;
+        height: 20px;
+        padding: 20px 0px;
+        background-color: orange;
+        font-size: 18px;
+
+    }
+    .image
+    {
+        margin-top: 20px; 
+        height: 800px;
+        background-image: url('/static/image/taskmanager2.png');
+        background-size: cover; /* заполнить весь экран */
+        background-repeat: no-repeat; /* не повторять */
+    }
+    .imageh2
+    {
+        text-align: center;
+        padding-top: 180px;
+        padding-left: 70px;
+    }
+</style>
+<body>
+    
+    <div class="all">
+
+        <div class="nav">
+            <a href="{% url 'home-view' %}">Home</a>
+            <a href="{% url 'detail-task-view' %}">TaskManager</a>
+        </div>
+        <div class="image">
+        <h2 class="imageh2">Создайте свои задачи на будущем!</h2>
+        </div>
+    </div>
+
+</body>
+</html>
