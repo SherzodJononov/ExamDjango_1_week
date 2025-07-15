@@ -58,7 +58,40 @@
         width: 45%;
         margin-top: 20px;
     }
+   .sure
+   {
+    width: 25%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   .No
+   {
+    width: 25%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 22px;
+    text-decoration: none;
+    background-color: gray;
+    }
    
+   #Yes
+   {
+    font-size: 22px;
+   }
+   .aaa
+   {
+    text-decoration: none;
+    color: black;
+   }
+   .h222
+   {
+    text-align: center;
+    margin-top: 240px;
+   }
 </style>
 <body>
     <div class="nav">
@@ -70,13 +103,19 @@
         <div class="image">
             <img src="/static/image/Task.png" alt="">
         </div>
+        <div class="sure">
 
-    <h2>Are tou sure to delete {{ task.title }}</h2>
-    <a href="{% url 'detail-task-view' %}">No</a>
-    <form method="post">
-        {% csrf_token %}
-        <input type="submit" value="Yes">
-    </form>
+            <h2 class="h222">Are you sure to delete <br>{{ data.title }}</h2>
+            <div class="No">
+
+                <a href="{% url 'detail-task-view' %}" class="aaa">No</a>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Yes" id="Yes">
+                </form>
+            </div>
+        </div>
+
         </div>
     </div>
 </body>

@@ -80,7 +80,12 @@
   transition: background 0.2s;
 }
  
- 
+.CRC
+{
+    width: 35%;
+    display: flex;
+    justify-content: space-around;
+}
 </style>
 <body>
     
@@ -88,7 +93,11 @@
 
         <div class="nav">
             <a href="{% url 'home-view' %}">Home</a>
-            <a href="{% url 'create-task-view' %}">CreateTask</a>
+            <div class="CRC">
+                <a href="{% url 'create-task-view' %}">CreateTask</a>
+                <a href="">Students</a>
+                <a href="">Course</a>
+            </div>
         </div>
         <div class="pageone">
 
@@ -99,25 +108,21 @@
             <div class="tasks">
                 <table class="table">
                     <tr>
-                        <th>id</th>
-                        <th>user_id</th>
-                        <th>title</th>
-                        <th>description</th>
-                        <th>is_completed</th>
-                        <th>created_at</th>
+                        <th>Id</th>
+                        <th>Student</th>
+                        <th>Title</th>
+                        <th>Description</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
-                    {% for t in task %}
+                    {% for t in tasks %}
                     <tr>
                         <td>{{t.id}}</td>
-                        <td>{{t.user_id}}</td>
+                        <td>{{t.student.fullname}}</td>
                         <td>{{t.title}}</td>
                         <td>{{t.description}}</td>
-                        <td>{{t.is_compeleted}}</td>
-                        <td>{{t.created_at}}</td>
                         <td  class="sls"><a href="{% url 'delete-task-view' t.id %}">Delete</a></td>
-                        <td  class="sls"><a href="{% url 'create-task-view' %}">Edit</a></td>
+                        <td  class="sls"><a href="{% url 'update-task-view' t.id %}">Edit</a></td>
                     </tr>
                     {% endfor %}
                 </table>

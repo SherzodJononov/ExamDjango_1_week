@@ -35,6 +35,12 @@
         padding-top: 180px;
         padding-left: 70px;
     }
+    .CRC
+{
+    width: 35%;
+    display: flex;
+    justify-content: space-around;
+}
 </style>
 <body>
     
@@ -42,7 +48,11 @@
 
         <div class="nav">
             <a href="{% url 'home-view' %}">Home</a>
-            <a href="{% url 'detail-task-view' %}">TaskManager</a>
+            <div class="CRC">
+                <a href="{% url 'detail-task-view' %}">TaskManager</a>
+                <a href="">Students</a>
+                <a href="">Course</a>
+            </div>
         </div>
         <div class="image">
         <h2 class="imageh2">Создайте свои задачи на будущем!</h2>

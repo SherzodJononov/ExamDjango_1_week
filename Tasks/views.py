@@ -1,46 +1,63 @@
 from django.shortcuts import render,HttpResponse,redirect
-from .models import User,Task
+from .models import Task,Student
+
 def home(request):
     return render(request,'home.html')
 
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Task, User
+from .models import Task
 
 def create_task(request):
-    if request.method == 'POST':
-        user_id = request.POST.get('user_id')
+    if request.method == 'GET':
+        tasks = Task.objects.all()
+        return render(request, 'task/create_task.html',{"tasks":tasks})
+    elif request.method == 'POST':
+        student = request.POST.get('student')
         title = request.POST.get('title')
         description = request.POST.get('description')
-        is_completed = request.POST.get('is_completed') == 'on'  # checkbox
-
-        if not user_id or not title or not description:
-            return HttpResponse('Error: Please fill all required fields')
-
-        task = Task(
-            user_id=user_id,
-            title=title,
-            description=description,
-            is_completed=is_completed
+        student = Student.objects.filter(id=student).first()
+        Task.objects.create(
+            student = student,
+            title = title,
+            description = description
         )
-        task.save()
-        return redirect('home-view')  # имя URL, не шаблон
-
-    elif request.method == 'GET':
-        users = User.objects.all()
-        return render(request, 'task/create_task.html', {'users': users})
+        return redirect('detail-task-view')
 
     
 
 def detail_task(request):
-    task = Task.objects.all()
-    return render(request,'task/detail_task.html',{"task":task})
+    tasks = Task.objects.all()
+    return render(request,'task/detail_task.html',{"tasks":tasks})
 
 def delete_task(request,pk):
-    try:
-        task = Task.objects.get(id=pk)
-        task.delete()
-        return redirect('task/detail_task.html')
-    except Task.DoesNotExist:
-        return redirect('task/detail_task.html')
+    tasks = Task.objects.filter(id=pk).first()
+    if request.method == 'GET':
+        return render(request,'task/delete_task.html',{"data":tasks})
+    task = Task.objects.get(id=pk)
+    task.delete()
+    return redirect('detail-task-view')
+
+
+from datetime import datetime
+def update_task(request,pk):
+    if request.method == 'GET':
+        task = Task.objects.filter(id=pk).first()
+        tasks = Task.objects.all()
+        return render(request,'task/update_task.html',{"task":task,"tasks":tasks})
+    if request.method == 'POST':
+        uptask = Task.objects.filter(id=pk).first()
+        student_id = request.POST.get('student')
+        student = Student.objects.filter(id=student_id).first()
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        
+        uptask.student = student
+        uptask.title = title
+        uptask.description = description
+        uptask.created_at = datetime.now()
+        uptask.save()
+        return redirect('detail-task-view')
+    
+    
